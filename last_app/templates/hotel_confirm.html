@@ -1,0 +1,187 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<style>
+
+/* Background overlay */
+body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("{% static 'img/bg-hotel.jpg' %}") no-repeat center center;
+
+    background-size: cover;
+    background-attachment: fixed;
+
+    z-index: -1;
+}
+
+/* Center wrapper */
+.auth-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+/* Glass card */
+.auth-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 35px;
+    width: 100%;
+    max-width: 600px;
+
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+
+    color: white;
+}
+
+/* Title */
+.success-title{
+    text-align: center;
+    color: #00ffae;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.subtitle{
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+/* Section titles */
+.section-title{
+    color: #00c6ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+
+    border-left: none !important;
+    border-right: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.section-title::before,
+.section-title::after{
+    display: none !important;
+    content: none !important;
+}
+
+
+/* Info rows */
+.info-row{
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.info-row b{
+    color: #00c6ff;
+}
+
+/* Divider */
+hr{
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* Button */
+.btn-home{
+    display: block;
+    width: 100%;
+    padding: 12px;
+
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+
+    border: none;
+    border-radius: 6px;
+
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+
+    margin-top: 20px;
+
+    transition: 0.3s;
+}
+
+.btn-home:hover{
+    transform: scale(1.05);
+    color: white;
+}
+
+</style>
+
+
+<div class="auth-wrapper">
+
+    <div class="auth-box">
+
+        <h2 class="success-title">🎉 Booking Confirmed</h2>
+
+        <p class="subtitle">
+            Thank you for booking with Travela. Your hotel reservation has been successfully completed.
+        </p>
+
+        <hr>
+
+        <!-- Hotel Details -->
+        <h5 class="section-title">🏨 Hotel Details</h5>
+
+        <div class="info-row"><b>Hotel:</b> {{ hotel_booking.hotel }}</div>
+        <div class="info-row"><b>City:</b> {{ hotel_booking.city }}</div>
+        <div class="info-row"><b>Price per Night:</b> ₹{{ hotel_booking.price }}</div>
+        <div class="info-row"><b>Guests:</b> {{ hotel_booking.guests }}</div>
+
+        <hr>
+
+        <!-- Stay Details -->
+        <h5 class="section-title">📅 Stay Details</h5>
+
+        <div class="info-row"><b>Check In:</b> {{ hotel_booking.check_in }}</div>
+        <div class="info-row"><b>Check Out:</b> {{ hotel_booking.check_out }}</div>
+
+        <hr>
+
+        <!-- Customer Details -->
+        <h5 class="section-title">👤 Customer Details</h5>
+
+        <div class="info-row"><b>Name:</b> {{ hotel_booking.name }}</div>
+        <div class="info-row"><b>Phone:</b> {{ hotel_booking.phone }}</div>
+
+        <hr>
+
+        <!-- Payment Details -->
+        <h5 class="section-title">💰 Payment Summary</h5>
+        <div class="info-row"><b>Total Nights:</b> {{ total_days }}</div>
+        <div class="info-row"><b>Room Price:</b> ₹{{ hotel_booking.price }}</div>
+        <div class="info-row"><b>Total Amount:</b> ₹{{ hotel_booking.total }}</div>
+
+        <hr>
+        <a href="{% url 'razorpay_payment' 'hotel' hotel_booking.id %}" class="btn-home">
+    💳 Pay Now
+</a>
+
+        <a href="{% url 'index' %}" class="btn-home">
+            Back To Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

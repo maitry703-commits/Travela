@@ -1,0 +1,139 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br><br>
+
+<style>
+
+/* Full page background */
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1504196606672-aef5c9cefc92");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center container */
+.auth-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass confirmation box */
+.auth-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 35px;
+    width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* Headings */
+.success-title{
+    text-align: center;
+    color: #00ffae;
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+/* Section titles */
+.section-title{
+    color: #00c6ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Text styling */
+.info-row{
+    margin-bottom: 8px;
+}
+
+.info-row b{
+    color: #00c6ff;
+}
+
+/* Button */
+.btn-home{
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-home:hover{
+    transform: scale(1.03);
+}
+
+hr{
+    border-color: rgba(255,255,255,0.3);
+}
+
+</style>
+
+
+<div class="auth-wrapper">
+<div class="auth-box">
+
+<h2 class="success-title">✈️ Flight Booking Confirmed</h2>
+<p class="subtitle">Your flight has been successfully booked. Have a safe journey!</p>
+
+<hr>
+
+<h5 class="section-title">🛫 Flight Details</h5>
+
+<div class="info-row"><b>Airline:</b> {{ flight_booking.airline }}</div>
+<div class="info-row"><b>Route:</b> {{ flight_booking.from_location }} → {{ flight_booking.to_location }}</div>
+<div class="info-row"><b>Departure Time:</b> {{ flight_booking.departure_time }}</div>
+<div class="info-row"><b>Travel Date:</b> {{ flight_booking.travel_date }}</div>
+<div class="info-row"><b>Passengers:</b> {{ flight_booking.passengers }}</div>
+
+<hr>
+
+<!-- Passenger Details -->
+<h5 class="section-title">👤 Passenger Details</h5>
+
+<div class="info-row"><b>Name:</b> {{ flight_booking.name }}</div>
+<div class="info-row"><b>Email:</b> {{ flight_booking.email }}</div>
+<div class="info-row"><b>Phone:</b> {{ flight_booking.phone }}</div>
+
+<hr>
+
+<!-- Payment Details -->
+<h5 class="section-title">💰 Payment Summary</h5>
+
+<div class="info-row"><b>Price Per Person:</b> ₹{{ flight_booking.price }}</div>
+<div class="info-row"><b>Total Amount:</b> ₹{{ flight_booking.total }}</div>
+
+<hr>
+<a href="{% url 'razorpay_payment' 'flight' flight_booking.id %}" class="btn-home">
+    💳 Pay Now
+</a>
+
+<a href="{% url 'index' %}" class="btn-home">
+Back To Home
+</a>
+
+</div>
+</div>
+
+{% endblock %}

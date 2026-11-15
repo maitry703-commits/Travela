@@ -1,0 +1,130 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+<style>
+
+/* Background image */
+body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("{% static 'img/bg-hotel.jpg' %}") no-repeat center center;
+
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+/* Center wrapper */
+.confirm-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass card */
+.confirm-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    width: 550px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+    text-align: center;
+}
+
+/* Success image */
+.success-img{
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.success-title{
+    color: #00ffae;
+    font-weight: bold;
+}
+
+/* Subtitle */
+.subtitle{
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+/* Booking details box */
+.details-box{
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Button */
+.home-btn{
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.home-btn:hover{
+    transform: scale(1.05);
+}
+
+</style>
+
+
+<div class="confirm-wrapper">
+
+    <div class="confirm-box">
+
+        <img src="{% static 'img/success.png' %}" class="success-img">
+
+        <h2 class="success-title">🎉 Booking Confirmed!</h2>
+
+        <p class="subtitle">
+            Thank you for booking with <strong>Travela</strong>.  
+            Your tour has been successfully booked.
+        </p>
+
+        <div class="details-box">
+
+            <h5 class="mb-3">📄 Booking Details</h5>
+
+            <p><strong>Name:</strong> {{ request.GET.name|default:"Guest" }}</p>
+
+            <p><strong>Email:</strong> {{ request.GET.email|default:"Not Provided" }}</p>
+
+            <p><strong>Destination:</strong> {{ request.GET.destination|default:"Selected Tour" }}</p>
+
+            <p><strong>Persons:</strong> {{ request.GET.persons|default:"1" }}</p>
+
+        </div>
+
+        <a href="{% url 'index' %}" class="home-btn">
+            Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

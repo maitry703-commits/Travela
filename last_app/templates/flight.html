@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h3 class="text-white display-3 mb-4">Available Flights</h3>
+        <p class="text-white fs-5">Book your perfect flight for a comfortable journey</p>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- Flight Section Start -->
+<div class="container py-5">
+    <div class="row g-4">
+
+        {% for flight in flights %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow rounded overflow-hidden border-0">
+                
+                <img src="{{ flight.image.url }}" class="img-fluid" style="height:250px; object-fit:cover;">
+
+                <div class="card-body text-center">
+                    <h4 class="text-primary">{{ flight.airline_name }}</h4>
+
+                    <p class="mb-2">
+                        <i class="fa fa-plane-departure text-success"></i>
+                        {{ flight.from_location }}
+                        →
+                        <i class="fa fa-plane-arrival text-danger"></i>
+                        {{ flight.to_location }}
+                    </p>
+
+                    <p class="mb-2">
+                        <i class="fa fa-clock text-info"></i>
+                        Departure: {{ flight.departure_time }}
+                    </p>
+
+                    <h5 class="text-success">₹ {{ flight.price }} </h5>
+
+                    <a href="{% url 'flight_book' flight.id %}" 
+                       class="btn btn-primary mt-3 px-4">
+                       Book Now
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<!-- Flight Section End -->
+
+{% endblock %}

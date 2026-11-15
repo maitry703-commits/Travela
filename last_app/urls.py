@@ -1,0 +1,42 @@
+from django.urls import path
+from .import views 
+
+urlpatterns = [
+    path('index/', views.index, name = "index"),
+    path('about/', views.about, name = "about"),
+    path('services/', views.services, name = "services"),
+    path('hotel/', views.hotel, name = "hotel"),
+    path('hotel_book/<int:id>/', views.hotel_book, name='hotel_book'),
+    path('hotel_confirm/', views.hotel_confirm, name = "hotel_confirm"),
+    path('payment_booking/', views.payment_booking, name = "payment_booking"),
+    path('pay_now/', views.pay_now, name = "pay_now"),
+    path('flight/', views.flight, name = "flight"),
+    path('flight_book/<int:id>/', views.flight_book, name = "flight_book"),
+    path('flight_confirm/', views.flight_confirm, name = "flight_confirm"),
+    path('packages/', views.packages, name = "packages"),
+    path('package_book/<int:id>/', views.package_book, name = "package_book"),
+    path('package_confirm/', views.package_confirm, name = "package_confirm"),
+    path('package_detail/<slug:slug>/', views.package_detail, name = "package_detail"),
+    path('blog/', views.blog, name = "blog"),
+    path('booking/', views.booking, name = "booking"),
+    path('booking_confirm/', views.booking_confirm, name = "booking_confirm"),
+    path('contact/', views.contact, name = "contact"),
+    path('destination/', views.destination, name = "destination"),
+    path('gallery/', views.gallery, name = "gallery"),
+    path('guides/', views.guides, name = "guides"),
+    path('testimonial/', views.testimonial, name = "testimonial"),
+    path('tour/', views.tour, name = "tour"),
+    path('register/', views.register, name = "register"),
+    path('', views.login, name = "login"),
+    path('logout/', views.logout, name = "logout"),
+    path('profile/', views.profile, name = "profile"),
+    path('edit_profile/', views.edit_profile, name = "edit_profile"),
+    path('inbox/', views.inbox, name = "inbox"),
+    path('notification/', views.notification, name = "notification"),
+    path('error/', views.error, name = "error"),
+    path('razorpay_payment/<str:type>/<int:id>/', views.razorpay_payment, name='razorpay_payment'),
+    path('payment_success/<str:type>/<int:id>/', views.payment_success, name='payment_success'),
+    path('delete_booking/<str:type>/<int:id>/', views.delete_booking, name='delete_booking'),
+
+    
+]

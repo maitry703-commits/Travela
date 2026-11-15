@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container py-5">
+    <h1>{{ service.title }}</h1>
+
+    <p>{{ service.description }}</p>
+
+    <i class="{{ service.icon_class }} fa-4x text-primary"></i>
+
+</div>
+
+{% endblock %}

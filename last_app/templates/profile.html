@@ -1,0 +1,144 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Background on BODY */
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center wrapper */
+.profile-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Profile Card */
+.profile-card{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    width: 420px;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* Header */
+.profile-header img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #00c6ff;
+    margin-bottom: 10px;
+}
+
+.profile-header h3{
+    margin: 10px 0 5px;
+    color: #00c6ff;
+}
+
+.profile-header p{
+    color: #ddd;
+    font-size: 14px;
+}
+
+/* Info boxes */
+.info-box{
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.info-box span{
+    font-size: 12px;
+    color: #00c6ff;
+}
+
+.info-box p{
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+}
+
+/* Footer buttons */
+.profile-footer{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-footer a{
+    width: 48%;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+.profile-footer .edit-btn{
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+}
+
+.profile-footer .logout-btn{
+    background: linear-gradient(45deg,#ff4b2b,#ff416c);
+}
+</style>
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+
+        <div class="profile-header">
+            <img src="{{ user.profile.image.url }}">
+            <h3>{{ user.get_full_name|default:user.username }}</h3>
+            <p>{{ user.email }}</p>
+        </div>
+
+        <div class="profile-body">
+            <div class="info-box">
+                <span>Username</span>
+                <p>{{ user.username }}</p>
+            </div>
+
+            <div class="info-box">
+                <span>Email</span>
+                <p>{{ user.email }}</p>
+            </div>
+
+            <div class="info-box">
+                <span>Joined On</span>
+                <p>{{ user.date_joined }}</p>
+            </div>
+        </div>
+
+        <div class="profile-footer">
+            <a href="{% url 'edit_profile' %}" class="edit-btn">Edit Profile</a>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

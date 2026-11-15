@@ -1,0 +1,143 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Wrapper */
+.edit-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Card */
+.edit-card{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    width: 420px;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* Title */
+.edit-card h2{
+    text-align: center;
+    color: #00c6ff;
+    margin-bottom: 10px;
+}
+
+.edit-card p{
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-group{
+    margin-bottom: 15px;
+}
+
+.input-group label{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.input-group input, .input-group textarea{
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.15);
+    color: white;
+    outline: none;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder{
+    color: #ddd;
+}
+
+/* Buttons */
+.btn-group{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.save-btn{
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cancel-btn{
+    width: 48%;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    background: linear-gradient(45deg,#ff4b2b,#ff416c);
+    color: white;
+}
+</style>
+
+<div class="edit-wrapper">
+    <div class="edit-card">
+        <h2>Edit Profile</h2>
+        <p>Update your personal information</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="name" value="{{ request.user.get_full_name }}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ request.user.email }}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <input type="text" name="mobile" placeholder="Enter mobile number">
+            </div>
+            
+            <div class="input-group">
+                <label>Profile Image</label>
+                <input type="file" name="image">
+            </div>
+
+            <div class="input-group">
+                <label>Address</label>
+                <textarea name="address" rows="3" placeholder="Enter address"></textarea>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="save-btn">Save</button>
+                <a href="{% url 'profile' %}" class="cancel-btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

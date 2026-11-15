@@ -1,0 +1,138 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url("{% static 'img/breadcrumb-bg.jpg' %}");
+    background-size: cover;
+    background-position: center;
+}
+
+.payment-wrapper{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-box{
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+
+    padding: 40px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    color: white;
+
+    width: 400px;
+}
+
+.btn-pay{
+
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+
+    border: none;
+
+    padding: 12px 25px;
+
+    color: white;
+
+    border-radius: 6px;
+
+    margin-top: 20px;
+
+}
+
+</style>
+
+
+<div class="payment-wrapper">
+
+<div class="payment-box">
+
+<h3>Complete Your Payment</h3>
+
+<p>Hotel: {{ hotel }}</p>
+
+<p>Name: {{ name }}</p>
+
+<p>Amount: ₹{{ price }}</p>
+
+<button id="pay-btn" class="btn-pay">
+Pay Now
+</button>
+
+<form id="success-form" method="POST" action="{% url 'pay_now' %}">
+{% csrf_token %}
+
+<input type="hidden" name="hotel" value="{{ hotel }}">
+<input type="hidden" name="city" value="{{ city }}">
+<input type="hidden" name="price" value="{{ price }}">
+<input type="hidden" name="name" value="{{ name }}">
+<input type="hidden" name="phone" value="{{ phone }}">
+<input type="hidden" name="check_in" value="{{ check_in }}">
+<input type="hidden" name="check_out" value="{{ check_out }}">
+<input type="hidden" name="guests" value="{{ guests }}">
+<input type="hidden" name="payment_id" id="payment_id">
+
+</form>
+
+</div>
+
+</div>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+
+    "key": "{{ razorpay_key }}",
+
+    "amount": "{{ price }}" * 100,
+
+    "currency": "INR",
+
+    "name": "Travela Hotel Booking",
+
+    "description": "Secure Payment",
+
+    "handler": function (response){
+
+        document.getElementById("payment_id").value =
+        response.razorpay_payment_id;
+
+        document.getElementById("success-form").submit();
+
+    },
+
+    "theme": {
+
+        "color": "#0072ff"
+
+    }
+
+};
+
+var rzp = new Razorpay(options);
+
+document.getElementById('pay-btn').onclick = function(e){
+
+    rzp.open();
+
+    e.preventDefault();
+
+}
+
+</script>
+
+
+{% endblock %}

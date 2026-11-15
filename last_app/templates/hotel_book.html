@@ -1,0 +1,163 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+
+/* Background image on body */
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("{% static 'img/breadcrumb-bg.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center wrapper */
+.auth-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass booking box */
+.auth-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 35px;
+    width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* Heading */
+.auth-box h3{
+    text-align: center;
+    color: #00c6ff;
+    margin-bottom: 25px;
+}
+
+/* Input group */
+.form-group{
+    margin-bottom: 18px;
+}
+
+.form-group label{
+    color: #ccc;
+    font-size: 14px;
+}
+
+.form-group input{
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    outline: none;
+    color: white;
+}
+
+/* readonly style */
+.readonly{
+    border-bottom: 2px solid #00c6ff;
+    color: #00c6ff;
+}
+
+/* Button */
+.btn-book{
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-book:hover{
+    transform: scale(1.03);
+}
+
+hr{
+    border-color: rgba(255,255,255,0.3);
+}
+
+</style>
+
+
+<div class="auth-wrapper">
+
+<div class="auth-box">
+
+<h3>🏨 Hotel Booking</h3>
+
+<form method="POST" action="{% url 'hotel_confirm' %}">
+{% csrf_token %}
+
+<!-- Hotel Info -->
+<div class="form-group">
+<label>Hotel Name</label>
+<input type="text" name="hotel" value="{{ hotel.name }}" readonly class="readonly">
+</div>
+
+<div class="form-group">
+<label>City</label>
+<input type="text" name="city" value="{{ hotel.location }}" readonly class="readonly">
+</div>
+
+<div class="form-group">
+<label>Price (Per Night)</label>
+<input type="text" name="price" value="{{ hotel.price_per_night }}" readonly class="readonly">
+</div>
+
+<hr>
+
+<!-- Customer Info -->
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" name="name" required>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<input type="text" name="phone" required>
+</div>
+
+<div class="form-group">
+<label>Check In</label>
+<input type="date" name="check_in" required>
+</div>
+
+<div class="form-group">
+<label>Check Out</label>
+<input type="date" name="check_out" required>
+</div>
+
+<div class="form-group">
+<label>Guests</label>
+<input type="number" name="guests" min="1" required>
+</div>
+
+<button type="submit" class="btn-book">
+Pay & Confirm Booking
+</button>
+
+</form>
+
+
+
+
+</div>
+</div>
+
+{% endblock %}

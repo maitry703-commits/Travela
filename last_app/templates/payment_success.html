@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<br><br>
+
+<style>
+
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center wrapper */
+.success-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass container */
+.success-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+    text-align: center;
+}
+
+/* Heading */
+.success-box h2{
+    color: #00ffae;
+    margin-bottom: 20px;
+}
+
+/* Booking details */
+.success-box h4{
+    margin-bottom: 15px;
+    color: #00c6ff;
+}
+
+.success-box p{
+    margin: 6px 0;
+    color: #ddd;
+}
+
+/* Button */
+.home-btn{
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.home-btn:hover{
+    transform: scale(1.03);
+}
+
+</style>
+
+
+<div class="success-wrapper">
+
+<div class="success-box">
+
+<h2>✅ Payment Successful!</h2>
+
+<h4>Booking Details</h4>
+
+<p><strong>Name:</strong> {{ booking.name }}</p>
+<p><strong>Service Type:</strong> {{ type|title }}</p>
+
+<!-- HOTEL DETAILS -->
+{% if type == "hotel" %}
+<p><strong>Hotel:</strong> {{ booking.hotel }}</p>
+<p><strong>City:</strong> {{ booking.city }}</p>
+<p><strong>Check In:</strong> {{ booking.check_in }}</p>
+<p><strong>Check Out:</strong> {{ booking.check_out }}</p>
+<p><strong>Guests:</strong> {{ booking.guests }}</p>
+<p><strong>Total Amount:</strong> ₹ {{ booking.total }}</p>
+
+<!-- FLIGHT DETAILS -->
+{% elif type == "flight" %}
+<p><strong>Airline:</strong> {{ booking.airline }}</p>
+<p><strong>From:</strong> {{ booking.from_location }}</p>
+<p><strong>To:</strong> {{ booking.to_location }}</p>
+<p><strong>Departure Date:</strong> {{ booking.travel_date }}</p>
+<p><strong>Passengers:</strong> {{ booking.passengers }}</p>
+<p><strong>Total Amount:</strong> ₹ {{ booking.total }}</p>
+
+<!-- PACKAGE DETAILS -->
+{% elif type == "package" %}
+<p><strong>Package Name:</strong> {{ booking.package_title }}</p>
+<p><strong>Destination:</strong> {{ booking.destination }}</p>
+<p><strong>Duration:</strong> {{ booking.days }} Days</p>
+<p><strong>Total Amount:</strong> ₹ {{ booking.total }}</p>
+{% endif %}
+
+<a href="/index/" class="home-btn">🏠 Go to Home</a>
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br><br><br>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <img src="{{ package.image.url }}" class="img-fluid rounded mb-4">
+
+            <h2>{{ package.title }}</h2>
+            <h4 class="text-primary">₹{{ package.price }}</h4>
+
+            <p><strong>Duration:</strong> {{ package.duration_days }} Days</p>
+            <p><strong>Destination:</strong> {{ package.destination.name }}</p>
+
+            <hr>
+
+            <p>{{ package.description|linebreaks }}</p>
+
+            <a href="{% url 'package_book' package.id %}" class="btn btn-primary mt-3">Book Now</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

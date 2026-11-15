@@ -1,0 +1,154 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<style>
+
+/* Full page background */
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1501785888041-af3ef285b470");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center container */
+.auth-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass confirmation box */
+.auth-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 35px;
+    width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+}
+
+/* Headings */
+.success-title{
+    text-align: center;
+    color: #00ffae;
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    text-align: center;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+/* Section titles */
+.section-title{
+    color: #00c6ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-left: none !important;
+    border-right: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.section-title::before,
+.section-title::after{
+    display: none !important;
+    content: none !important;
+}
+
+
+
+/* Text styling */
+.info-row{
+    margin-bottom: 8px;
+}
+
+.info-row b{
+    color: #00c6ff;
+}
+
+/* Button */
+.btn-home{
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-home:hover{
+    transform: scale(1.03);
+}
+
+hr{
+    border-color: rgba(255,255,255,0.3);
+}
+
+</style>
+
+
+<div class="auth-wrapper">
+
+<div class="auth-box">
+
+<h2 class="success-title">🎉 Package Booking Confirmed</h2>
+<p class="subtitle">Thank you for choosing Travela. Your tour has been successfully booked.</p>
+
+<hr>
+
+<h5 class="section-title">📦 Package Details</h5>
+
+<div class="info-row"><b>Package:</b> {{ package_booking.package_title }}</div>
+<div class="info-row"><b>Destination:</b> {{ package_booking.destination }}</div>
+<div class="info-row"><b>Travel Date:</b> {{ package_booking.travel_date }}</div>
+<div class="info-row"><b>Persons:</b> {{ package_booking.persons }}</div>
+
+<hr>
+
+<h5 class="section-title">👤 Customer Details</h5>
+
+<div class="info-row"><b>Name:</b> {{ package_booking.name }}</div>
+<div class="info-row"><b>Email:</b> {{ package_booking.email }}</div>
+<div class="info-row"><b>Phone:</b> {{ package_booking.phone }}</div>
+
+<hr>
+
+<h5 class="section-title">💰 Payment Summary</h5>
+
+<div class="info-row"><b>Price Per Person:</b> ${{ package_booking.price }}</div>
+<div class="info-row"><b>Total:</b> ${{ package_booking.booking.total }}</div>
+
+<hr>
+
+<h5 class="section-title">📝 Special Request</h5>
+<div class="info-row">{{ package_booking.request }}</div>
+
+<a href="{% url 'razorpay_payment' 'package' package_booking.id %}" class="btn-home" 
+   style="background: linear-gradient(45deg,#ff512f,#dd2476); margin-bottom:10px;">
+    💳 Pay Now
+</a>
+<a href="{% url 'index' %}" class="btn-home">
+Back To Home
+</a>
+
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<style>
+body{
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Center container */
+.auth-wrapper{
+    min-height: calc(100vh - 90px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glass Box */
+.auth-box{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    color: white;
+    text-align: center;
+}
+
+.auth-box h2{
+    color: #00c6ff;
+    margin-bottom: 10px;
+}
+
+.auth-box p{
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+/* Floating inputs */
+.input-group{
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #aaa;
+    outline: none;
+    color: white;
+}
+
+.input-group label{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #ccc;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label{
+    top: -12px;
+    font-size: 12px;
+    color: #00c6ff;
+}
+
+/* Button */
+.btn{
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg,#00c6ff,#0072ff);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(1.03);
+}
+
+.switch-link{
+    margin-top: 15px;
+}
+
+.switch-link a{
+    color: #00c6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+</style>
+
+<div class="auth-wrapper">
+    <div class="auth-box">
+        <h2>Welcome Back</h2>
+        <p>Login to your Travela account 🌍</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <input type="text" name="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
+            <p class="switch-link">
+                Don't have an account? <a href="{% url 'register' %}">Register</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

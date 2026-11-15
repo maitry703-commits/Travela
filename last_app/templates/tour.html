@@ -1,0 +1,173 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h3 class="text-white display-3 mb-4">Tour Category</h3>
+        <ol class="breadcrumb justify-content-center mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active text-white">Category</li>
+        </ol>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- Explore Tour Start -->
+<div class="container-fluid ExploreTour py-5">
+    <div class="container py-5">
+
+        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+            <h5 class="section-title px-3">Explore Tour</h5>
+            <h1 class="mb-4">The World</h1>
+            <p class="mb-0">Exploring the world opens your mind to new cultures, landscapes, and experiences. It allows you to discover beautiful destinations, taste different cuisines, and meet diverse people. Travel creates unforgettable memories, broadens perspectives, and brings adventure into life. Every journey teaches something new and makes life more meaningful, exciting, and inspiring for every traveler.
+                    </p>
+
+        </div>
+
+
+        <div class="tab-class text-center">
+
+            <!-- Tabs -->
+            <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
+
+                <li class="nav-item">
+                    <a class="d-flex mx-3 py-2 border border-primary bg-primary rounded-pill active"
+                       data-bs-toggle="pill"
+                       href="#NationalTab-1">
+
+                        <span class="text-white" style="width:250px;">
+                            National Tour Category
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill"
+                       data-bs-toggle="pill"
+                       href="#InternationalTab-2">
+
+                        <span class="text-dark" style="width:250px;">
+                            International Tour Category
+                        </span>
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <div class="tab-content">
+
+                <!-- National -->
+                <div id="NationalTab-1" class="tab-pane fade show active p-0">
+
+                    <div class="row g-4">
+
+                        {% for c in national %}
+
+                        <div class="col-md-6 col-lg-4">
+
+                            <div class="national-item">
+
+                                <img src="{{ c.image.url }}"
+                                     class="img-fluid w-100 rounded"
+                                     alt="">
+
+                                <div class="national-content">
+
+                                    <div class="national-info">
+
+                                        <h5 class="text-white text-uppercase mb-2">
+                                            {{ c.name }}
+                                        </h5>
+
+                                        <a href="#"
+                                           class="btn-hover text-white">
+
+                                            View All Place
+                                            <i class="fa fa-arrow-right ms-2"></i>
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="national-plus-icon">
+
+                                    <a href="#" class="my-auto">
+                                        <i class="fas fa-link fa-2x text-white"></i>
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- International -->
+                <div id="InternationalTab-2" class="tab-pane fade p-0">
+
+                    <div class="row g-4">
+
+                        {% for c in international %}
+
+                        <div class="col-md-6 col-lg-4">
+    <div class="national-item position-relative overflow-hidden rounded">
+
+        <!-- Image -->
+        <img src="{{ c.image.url }}"
+             class="img-fluid w-100 rounded"
+             alt="">
+
+        <!-- Overlay Content -->
+        <div class="national-content position-absolute bottom-0 start-0 w-100 p-3">
+            <div class="national-info">
+
+                <h5 class="text-white text-uppercase mb-2">
+                    {{ c.name }}
+                </h5>
+
+                <a href="#"
+                   class="text-white fw-bold">
+
+                    View All Place
+                    <i class="fa fa-arrow-right ms-2"></i>
+
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Explore Tour End -->
+
+
+{% endblock %}

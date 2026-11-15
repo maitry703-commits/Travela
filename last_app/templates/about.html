@@ -1,0 +1,152 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h3 class="text-white display-3 mb-4">About Us</h3>
+        <ol class="breadcrumb justify-content-center mb-0">
+            <li class="breadcrumb-item">
+                <a href="{% url 'index' %}" class="text-white">Home</a>
+            </li>
+            <li class="breadcrumb-item text-white">Pages</li>
+            <li class="breadcrumb-item active text-white">About</li>
+        </ol>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- About Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+
+        <div class="row g-5 align-items-center">
+
+            <!-- Left Image -->
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="{% static 'img/about-img.jpg' %}" class="img-fluid rounded w-100" alt="">
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="col-lg-6">
+                <h5 class="section-about-title pe-3">ABOUT US</h5>
+
+                <h1 class="mb-4">
+                    Welcome to <span class="text-primary">Travela</span>
+                </h1>
+
+                <p class="mb-4">
+                    Travela is your trusted travel partner, helping you discover
+                    amazing destinations across the world. We provide hotel booking,
+                    flight booking, tour packages, and travel guides.
+                </p>
+
+                <p class="mb-4">
+                    Our mission is to make travel easy, affordable, and enjoyable.
+                    With our expert guides and best travel deals, we ensure a smooth
+                    and unforgettable travel experience.
+                </p>
+
+                <div class="row gy-2 gx-4 mb-4">
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            First Class Flights
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            Handpicked Hotels
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            5 Star Accommodations
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            Latest Travel Guides
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            Affordable Packages
+                        </p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <p class="mb-0">
+                            <i class="fa fa-arrow-right text-primary me-2"></i>
+                            24/7 Customer Support
+                        </p>
+                    </div>
+
+                </div>
+
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="{% url 'contact' %}">
+                    Contact Us
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Team Start -->
+<div class="container-fluid py-5 bg-light">
+    <div class="container py-5 text-center">
+
+        <h5 class="section-title px-3">Our Team</h5>
+        <h1 class="mb-5">Meet Our Expert Guides</h1>
+
+        <div class="row g-4">
+
+            {% for guide in guides %}
+
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow">
+
+                    <img src="{{ guide.image.url }}" class="card-img-top" alt="">
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ guide.name }}</h5>
+                        <p class="card-text text-muted">
+                            {{ guide.designation }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            {% empty %}
+
+            <p>No guides available.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+<!-- Team End -->
+
+
+{% endblock %}
